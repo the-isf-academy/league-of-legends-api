@@ -7,45 +7,53 @@ import requests
 services_dict = {
         "partype": [str],
         "blurb": [str],
-        "tag": [str],
+        "title": [str],
 }
 
-def partype(champion):
-#returns the partype (what casting resource the champion)
-address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
-r = requests.get(address)
-r_json = r.json()
-data = r_json['data']
-#champion = {}
-champion = data[champion]
-partype = champion["partype"]
+def title(champion):
+#returns the title of the champion
+    address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
+    r = requests.get(address)
+    r_json = r.json()
+    data = r_json['data']
+    #champion = {}
+    champion = data[champion]
+    title = champion["title"]
+    return title
 
 def blurb(champion):
 #returns the blurb of a champion
-address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
-r = requests.get(address)
-r_json = r.json()
-data = r_json['data']
-#champion = {}
-champion = data[champion]
-blurb = champion["blurb"]
+    address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
+    r = requests.get(address)
+    r_json = r.json()
+    data = r_json['data']
+    #champion = {}
+    champion = data[champion]
+    blurb = champion["blurb"]
+    return blurb
 
-def title(champion):
-#returns the tag (or tags) of the champion
-address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
-r = requests.get(address)
-r_json = r.json()
-data = r_json['data']
-#champion = {}
-champion = data[champion]
-title = champion["title"]
+def partype(champion):
+#returns the partype (what casting resource the champion)
+    address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
+    r = requests.get(address)
+    r_json = r.json()
+    data = r_json['data']
+    #champion = {}
+    champion = data[champion]
+    partype = champion["partype"]
+    return partype
 
 
-something like
 
-something like
-r = requests.get(address)
-r_json = r.json()
-data = r_json['data']
-aatrox = data["Aatrox"]
-blurb = aatrox["blurb"]
+
+# print(title("Zed"))
+# print(blurb("Zed"))
+# print(partype("Zed"))
+
+# something like
+
+# r = requests.get(address)
+# r_json = r.json()
+# data = r_json['data']
+# aatrox = data["Aatrox"]
+# blurb = aatrox["blurb"]
