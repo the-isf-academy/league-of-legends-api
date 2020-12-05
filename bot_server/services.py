@@ -16,7 +16,17 @@ def title(champion):
     r = requests.get(address)
     r_json = r.json()
     data = r_json['data']
-    #champion = {}
+
+    data.replace(" ","")  #replaces spaces so no edge case there
+    if data.index("'")>= 0 #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
+        data.replace("'","")  #deletes the apostrophe
+    if data = 'RekSai' or 'KogMaw'
+    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
+    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
+    else: #for literally every champion aside from RekSai & KogMaw
+        data.casefold() #converts string into lower case
+        data.capitalize() #converts 1st letter into upper case
+
     champion = data[champion]
     title = champion["title"]
     return title
