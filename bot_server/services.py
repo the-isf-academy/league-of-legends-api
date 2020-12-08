@@ -8,6 +8,7 @@ services_dict = {
         "partype": [str],
         "blurb": [str],
         "title": [str],
+        "attackRange": [int],
 }
 
 def title(champion):
@@ -76,8 +77,17 @@ def partype(champion):
     partype = champion["partype"]
     return partype
 
+def attackrange(champion):
+    address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
+    r = requests.get(address)
+    r_json = r.json()
+    data = r_json['data']
 
-
+#    champion = data[champion]
+    champion = data[champion[stats]]
+    #stats = data[champion[stats]]
+    attackrange = champion["attackrange"]
+    return attackrange
 
 # print(title("Zed"))
 # print(blurb("Zed"))

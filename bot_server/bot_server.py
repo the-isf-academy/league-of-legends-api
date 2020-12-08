@@ -38,3 +38,14 @@ def partype_wrapper():
     champion = str(data['champion'])
     pt = partype(champion)
     return { "champion": pt }
+
+@app.route('/attackrange', methods=['GET'])
+def attackrange_wrapper():
+    data = request.get_json()
+    errors = check_payload(data, ["champion"])
+    if len(errors) > 0:
+        return {"errors": errors}, 400
+    #champion = int(data[champion[stats["attackrange"]]])
+    champion = str(data['champion'])
+    atkrange = attackrange(champion)
+    return { "champion": atkrange }
