@@ -3,7 +3,7 @@
 
 from flask import Flask, request
 from helpers import check_payload, parse_service_and_args_from, format_arguments
-from services import services_dict, title, blurb, partype
+from services import services_dict, title, blurb, partype, attackrange, movespeed
 
 app = Flask(__name__)
 
@@ -49,3 +49,14 @@ def attackrange_wrapper():
     champion = str(data['champion'])
     atkrange = attackrange(champion)
     return { "champion": atkrange }
+
+@app.route('/movespeed', methods=['GET'])
+def movespeed_wrapper():
+    data = request.get_json()
+    errors = check_payload(data, ["champion"])
+    if len(errors) > 0:
+        return {"errors": errors}, 400
+    #champion = int(data[champion[stats["attackrange"]]])
+    champion = str(data['champion'])
+    ms = movespeed(champion)
+    return { "champion": ms }
