@@ -7,6 +7,43 @@ from services import services_dict, title, blurb, partype, attackrange, movespee
 
 app = Flask(__name__)
 
+
+# parse message, format args, and check for errors in service and arguments
+@app.route('/', methods=['GET'])
+def hello():
+    return "Hello, this is the LoL_bot!"
+
+
+@app.route('/message', methods=['POST'])
+def new_message():
+    data = request.get_json()
+
+    # check for errors in payload
+    errors = check_payload(data, ["sender", "msg", "timestamp"])
+    if len(errors) > 0:
+        return {"errors": errors}, 400
+
+    # parse message, format args, and check for errors in service and arguments
+    msg = data["msg"]
+    service, arguments, errors = parse_service_and_args_from(msg, services_dict)
+    if len(errors) > 0:
+        return {"A service and champion is required to get results": errors}, 400
+
+    if service == "help":
+        return { "msg": help() }
+    elif service == "title":
+        return { "msg": title(arguments[0], arguments[1]) }
+    elif service == "blurb":
+        return { "msg": blurb(arguments[0], arguments[1]) }
+    elif service == "partype":
+        return { "msg": partype(arguments[0], arguments[1]) }
+    elif service == "attackrange":
+        return { "msg": attackrange(arguments[0], arguments[1]) }
+    elif service == "movespeed":
+        return { "msg": movespeed(arguments[0], arguments[1]) }
+    else:
+        return {"A service and champion is required to get results"}
+
 @app.route('/title', methods=['GET'])
 def title_wrapper():
     data = request.get_json()
@@ -45,7 +82,6 @@ def attackrange_wrapper():
     errors = check_payload(data, ["champion"])
     if len(errors) > 0:
         return {"errors": errors}, 400
-    #champion = int(data[champion[stats["attackrange"]]])
     champion = str(data['champion'])
     atkrange = attackrange(champion)
     return { "champion": atkrange }
@@ -56,7 +92,6 @@ def movespeed_wrapper():
     errors = check_payload(data, ["champion"])
     if len(errors) > 0:
         return {"errors": errors}, 400
-    #champion = int(data[champion[stats["attackrange"]]])
     champion = str(data['champion'])
     ms = movespeed(champion)
     return { "champion": ms }
