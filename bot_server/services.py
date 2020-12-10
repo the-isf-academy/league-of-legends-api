@@ -8,11 +8,17 @@ services_dict = {
         "partype": [str],
         "blurb": [str],
         "title": [str],
-        "attackRange": [str],
+        "attackrange": [str],
+        "movespeed": [str],
 }
 
 def title(champion):
-#returns the title of the champion
+    """
+    The title function returns the title when given the argument of a champion.
+    Firstly it deletes any spaces or apostrophes if any are found in the argument,
+    then it makes the string lower case and converts the 1st letter into upper case
+    then processes the argument and returns the title of a champion
+    """
     address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
     r = requests.get(address)
     r_json = r.json()
@@ -21,20 +27,27 @@ def title(champion):
     champion = champion.replace(" ","")  #replaces spaces so no edge case there
     if champion.find("'")>= 0: #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
         champion = champion.replace("'","")  #deletes the apostrophe
-    if champion == 'RekSai' or champion == 'KogMaw':
+
+    champion = champion.casefold() #converts string into lower case
+    champion = champion.capitalize() #converts 1st letter into upper case
+
+    if champion == 'Reksai' or champion == 'Kogmaw':
+        champion = champion.replace("s","S") #if there is an s in the champion it replaces it with a capital S
+        champion = champion.replace("m","M") #if there is an m in the champion it replaces it with a capital M
+    else:
         pass
-    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
-    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
-    else: #for literally every champion aside from RekSai & KogMaw
-        champion = champion.casefold() #converts string into lower case
-        champion = champion.capitalize() #converts 1st letter into upper case
 
     champion = data[champion] #finds dictionary of champion inside data
     title = champion["title"] #finds dictionary of title inside champion
     return title
 
 def blurb(champion):
-#returns the blurb of a champion
+    """
+    The blurb function returns the blurb when given the argument of a champion.
+    Firstly it deletes any spaces or apostrophes if any are found in the argument,
+    then it makes the string lower case and converts the 1st letter into upper case
+    then processes the argument and returns the blurb of a champion
+    """
     address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
     r = requests.get(address)
     r_json = r.json()
@@ -43,20 +56,27 @@ def blurb(champion):
     champion = champion.replace(" ","")  #replaces spaces so no edge case there
     if champion.find("'")>= 0: #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
         champion = champion.replace("'","")  #deletes the apostrophe
-    if champion == 'RekSai' or champion == 'KogMaw':
+
+    champion = champion.casefold() #converts string into lower case
+    champion = champion.capitalize() #converts 1st letter into upper case
+
+    if champion == 'Reksai' or champion == 'Kogmaw':
+        champion = champion.replace("s","S") #if there is an s in the champion it replaces it with a capital S
+        champion = champion.replace("m","M") #if there is an m in the champion it replaces it with a capital M
+    else:
         pass
-    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
-    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
-    else: #for literally every champion aside from RekSai & KogMaw
-        champion = champion.casefold() #converts string into lower case
-        champion = champion.capitalize() #converts 1st letter into upper case
 
     champion = data[champion] #finds dictionary of champion inside data
     blurb = champion["blurb"] #finds dictionary of blurb inside champion
     return blurb
 
 def partype(champion):
-#returns the partype (what casting resource the champion)
+    """
+    The partype function returns the partype when given the argument of a champion.
+    Firstly it deletes any spaces or apostrophes if any are found in the argument,
+    then it makes the string lower case and converts the 1st letter into upper case
+    then processes the argument and returns the partype of a champion
+    """
     address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
     r = requests.get(address)
     r_json = r.json()
@@ -65,19 +85,27 @@ def partype(champion):
     champion = champion.replace(" ","")  #replaces spaces so no edge case there
     if champion.find("'")>= 0: #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
         champion = champion.replace("'","")  #deletes the apostrophe
-    if champion == 'RekSai' or champion == 'KogMaw':
+
+    champion = champion.casefold() #converts string into lower case
+    champion = champion.capitalize() #converts 1st letter into upper case
+
+    if champion == 'Reksai' or champion == 'Kogmaw':
+        champion = champion.replace("s","S") #if there is an s in the champion it replaces it with a capital S
+        champion = champion.replace("m","M") #if there is an m in the champion it replaces it with a capital M
+    else:
         pass
-    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
-    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
-    else: #for literally every champion aside from RekSai & KogMaw
-        champion = champion.casefold() #converts string into lower case
-        champion = champion.capitalize() #converts 1st letter into upper case
 
     champion = data[champion] #finds dictionary of data, then champion
     partype = champion["partype"] #finds dictionary of data, then champion, then partype
     return partype
 
 def attackrange(champion):
+    """
+    The attackrange function returns the attackrange when given the argument of a champion.
+    Firstly it deletes any spaces or apostrophes if any are found in the argument,
+    then it makes the string lower case and converts the 1st letter into upper case
+    then processes the argument and returns the attackrange of a champion
+    """
     address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
     r = requests.get(address)
     r_json = r.json()
@@ -86,18 +114,26 @@ def attackrange(champion):
     champion = champion.replace(" ","")  #replaces spaces so no edge case there
     if champion.find("'")>= 0: #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
         champion = champion.replace("'","")  #deletes the apostrophe
+
+    champion = champion.casefold() #converts string into lower case
+    champion = champion.capitalize() #converts 1st letter into upper case
+
     if champion == 'Reksai' or champion == 'Kogmaw':
+        champion = champion.replace("s","S") #if there is an s in the champion it replaces it with a capital S
+        champion = champion.replace("m","M") #if there is an m in the champion it replaces it with a capital M
+    else:
         pass
-    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
-    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
-    else: #for literally every champion aside from RekSai & KogMaw
-        champion = champion.casefold() #converts string into lower case
-        champion = champion.capitalize() #converts 1st letter into upper case
 
     attackrange = data[champion]["stats"]["attackrange"] #finds dictionary of data, then champion, then stats, then attackrange
     return attackrange
 
 def movespeed(champion):
+    """
+    The movespeed function returns the movespeed when given the argument of a champion.
+    Firstly it deletes any spaces or apostrophes if any are found in the argument,
+    then it makes the string lower case and converts the 1st letter into upper case
+    then processes the argument and returns the movespeed of a champion
+    """
     address = 'http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json'
     r = requests.get(address)
     r_json = r.json()
@@ -106,13 +142,15 @@ def movespeed(champion):
     champion = champion.replace(" ","")  #replaces spaces so no edge case there
     if champion.find("'")>= 0: #champions such as Kha'zix, Vel'koz, Cho'gath etc are sometimes spelled with an apostrophe
         champion = champion.replace("'","")  #deletes the apostrophe
-    if champion == 'RekSai' or champion == 'KogMaw':
+
+    champion = champion.casefold() #converts string into lower case
+    champion = champion.capitalize() #converts 1st letter into upper case
+
+    if champion == 'Reksai' or champion == 'Kogmaw':
+        champion = champion.replace("s","S") #if there is an s in the champion it replaces it with a capital S
+        champion = champion.replace("m","M") #if there is an m in the champion it replaces it with a capital M
+    else:
         pass
-    #nothing happens because I don't know how to generalize code for something with captial letter in the middle
-    #RekSai & KogMaw are literally the only champions with a captial letter in the middle (2/152 champions)
-    else: #for literally every champion aside from RekSai & KogMaw
-        champion = champion.casefold() #converts string into lower case
-        champion = champion.capitalize() #converts 1st letter into upper case
 
     movespeed = data[champion]["stats"]["movespeed"] #finds dictionary of data, then champion, then stats, then movespeed
     return movespeed
