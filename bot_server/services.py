@@ -5,6 +5,7 @@
 import requests
 # service provided and expected arguments
 services_dict = {
+        "help":[],
         "partype": [str],
         "blurb": [str],
         "title": [str],
@@ -154,14 +155,3 @@ def movespeed(champion):
 
     movespeed = data[champion]["stats"]["movespeed"] #finds dictionary of data, then champion, then stats, then movespeed
     return movespeed
-# print(title("Zed"))
-# print(blurb("Zed"))
-# print(partype("Zed"))
-
-# something like
-
-# r = requests.get(address)
-# r_json = r.json()
-# data = r_json['data']
-# aatrox = data["Aatrox"]
-# blurb = aatrox["blurb"]
