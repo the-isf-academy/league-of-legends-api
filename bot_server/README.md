@@ -1,5 +1,4 @@
 # Bot Server
-**✏️ This is where you will write your code for this project. ✏️**
 
 ## Accessing the bot
 To access the bot, you should follow the instructions below to run the bot server and access
@@ -22,7 +21,7 @@ Content-Type: text/html; charset=utf-8
 Date: Wed, 18 Nov 2020 08:26:43 GMT
 Server: Werkzeug/1.0.1 Python/3.8.5
 
-Hello from the cs10 message bot!
+Hello from the LoL bot!
 ```
 
 ### Accessing the server from another computer
@@ -44,20 +43,18 @@ Content-Type: text/html; charset=utf-8
 Date: Wed, 18 Nov 2020 08:26:43 GMT
 Server: Werkzeug/1.0.1 Python/3.8.5
 
-Hello from a cs10 message bot!
+Hello, this is the LoL bot!
 ```
 
 ## Services
-✏️ **EDIT THIS SECTION OF THE README TO DESCRIBE THE SERVICES YOUR BOT PROVIDES.** ✏️
 
-Here's an example:
-
-| Service  | Description                                                                                   | API Route   | Message Platform Command | Parameters (with types)                                                                                                                                        | Example Usage       | Returns                                |
+| Service  | Description                                                                                   | API Route   | Message Platform Command | Parameters (with  types)                                                                                                                                        | Example Usage       | Returns                                |
 |----------|-----------------------------------------------------------------------------------------------|-------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|----------------------------------------|
-| add      | Adds two numbers and returns the sum                                                          | `/add`      | `add num0 num1`            | `num0` (`float`): first number to sum, `num1` (`float`): second number to sum                                                                                      | add 3 4             | `{ "value": sum of nums }`             |
-| subtract | Subtracts two numbers and returns the difference                                              | `/subtract` | `subtract num0 num1`       | `num0` (`float`): number, `num1` (`float`): number to subtract from num0                                                                                           | subtract 5 2        | `{ "value": difference of nums }`      |
-| search   | Searches Wolfram Alpha for a query and returns the short text response                        | `/search`   | `search query`             | `query` (`string`): term to search for                                                                                                                           | search golden ratio | `{ "result": result }`                 |
-| message  | Receives a message from the messaging platform, triggers the service, and returns the result. | `/message`  | n/a                      | `sender` (`string`): who sent the service request, msg (`string`): message containing service request, timestamp (`float`): the time in seconds since the  epoch | n/a                 | `{ "msg": result of service request }` |
+| title      | gives the title of the champion given | `/title`      | `title champion`            | `champion` (`string`):  a champion from patch 10.24 or before    | title Zed             | `{ "champion": title of champion }`             |
+| blurb      | gives the blurb of the champion given | `/blurb`      | `blurb champion`            | `champion` (`string`):  a champion from patch 10.24 or before    | blurb Zed             | `{ "champion": blurb of champion }`             |
+| partype      | gives the partype of the champion given | `/partype`      | `partype champion`            | `champion` (`string`):  a champion from patch 10.24 or before    | partype Zed             | `{ "champion": partype of champion }`
+| attackrange      | gives the attackrange of the champion given | `/attackrange`      | `attackrange champion`            | `champion` (`string`):  a champion from patch 10.24 or before    | attackrange Zed             | `{ "champion": blurb of champion }`
+| movespeed      | gives the movespeed of the champion given | `/movespeed`      | `movespeed champion`            | `champion` (`string`):  a champion from patch 10.24 or before    | movespeed Zed             | `{ "champion": movespeed of champion }`  
 
 
 ## Files
@@ -75,48 +72,43 @@ the route parses the message sent to the bot into the `service` requested and a 
 of `arguments` passed with the message. Additionally, the route checks the formatting of
 the service request and generates an error if anything is wrong. However, currently the
 route can only respond to a request for help.
-**✏️ You will need to edit this function so that is initiates the service from the `services`
-module that the user requested and responds appropriately.**
 * `/help` (`GET`) - This route should return a message describing to a user what your bot
 does and how to use it.
-**✏️ You will need to edit this route so that the message accurately describes your bot's
-services.**
-* `/<your service routes>` (`GET`/`POST`) - **✏️ These routes are totally up to you to design and
-write.** You should have a route for each of the services your bot provides. However, the functions
-for these routes shouldn't perform the services themselves. Instead, they should call functions
-from your `services` module (described below).
+* `/<title>` (`GET`) - ** The title function returns the title when given the argument of a champion.
+  Firstly it deletes any spaces or apostrophes if any are found in the argument,
+  then it makes the string lower case and converts the 1st letter into upper case
+  then processes the argument and returns the title of a champion.
+* `/<blurb>` (`GET`) - ** The blurb function returns the blurb when given the argument of a champion.
+  Firstly it deletes any spaces or apostrophes if any are found in the argument,
+  then it makes the string lower case and converts the 1st letter into upper case
+  then processes the argument and returns the blurb of a champion.
+* `/<partype>` (`GET`) - ** The partype function returns the partype when given the argument of a champion.
+  Firstly it deletes any spaces or apostrophes if any are found in the argument,
+  then it makes the string lower case and converts the 1st letter into upper case
+  then processes the argument and returns the partype of a champion.
+* `/<attackrange>` (`GET`) - ** The attackrange function returns the attackrange when given the argument of a champion.
+  Firstly it deletes any spaces or apostrophes if any are found in the argument,
+  then it makes the string lower case and converts the 1st letter into upper case
+  then processes the argument and returns the attackrange of a champion.
+* `/<movespeed>` (`GET`) - ** The movespeed function returns the movespeed when given the argument of a champion.
+  Firstly it deletes any spaces or apostrophes if any are found in the argument,
+  then it makes the string lower case and converts the 1st letter into upper case
+  then processes the argument and returns the movespeed of a champion.
 
 ### `services.py`
 This module defines functions for each of the services your bot provides.
 
-**✏️ You should write any function that your bot needs to perform it's service in this file.**
-For example, if your bot will translate a message to another language, your module should
-probably contain a `translate()` function.
-
-This module also contains a dictioanry object called `services_dict`. **✏️ You should edit this
-dictionary to contain key-value pairs for each service your bot provides where the key is the
-service as a string and the value is a list of the types of arguments you need to perform that
-service.** For example, if you were writing a calculator bot, your `services_dict` might look like
-this:
 ```
 services_dict = {
-        "add": [float, float],
-        "subtract": [float, float],
-        "multiply": [float, float],
-        "divide": [float, float],
-        "help": []
+        "help":[],
+        "partype": [str],
+        "blurb": [str],
+        "title": [str],
+        "attackrange": [str],
+        "movespeed": [str],
 }
+
 ```
-*Note that one of the services in your `services_dict` must be `"help": []`.*
-
-As a reminder, here is a list of the types you might need for your bot:
-* `int` - an integer (i.e. `13`)
-* `float` - a decimal number (i.e. `3.14`)
-* `str` - a string of characters (i.e. `"Hello, world!")
-* `bool` - a `True` or `False` value
-
-*Note: If your service needs a string with multiple words as an argument, this MUST be the last
-argument in the list.*
 
 ### `helpers.py`
 This module contains helper functions used by the bot server.
@@ -133,7 +125,7 @@ contains all expected params and no unexpected params.
 * a list of errors found while checking payload (empty list implies no errors in payload)
 
 #### `parse_service_and_args_from(msg, services_dict)`
-Parses the message, `msg`, sent to the bot into the service and the arguments for the service, 
+Parses the message, `msg`, sent to the bot into the service and the arguments for the service,
 formats the arguments and checks for errors, and returns serivce, arguments, and errors as a tuple.
 Arguments in the `msg` should be single words, separated by spaces (execpt for the last argument).
 Arguments will be returned as a list of values based on the expected values defined in the `services_dict`.
@@ -150,7 +142,7 @@ that service requires
   * a list of error strings
 
 #### `format_arguments(service, args, services_dict)`
-Checks to make sure the arguements, `args`, are valid given the defintions in the `services_dict` and 
+Checks to make sure the arguements, `args`, are valid given the defintions in the `services_dict` and
 formats the arguments into the types defined in the `services_dict`. A description of errors found is placed into the
 errors list and returned
 
