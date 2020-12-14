@@ -1,5 +1,5 @@
 # bot_server.py
-# by
+# by Wesley Chui
 
 from flask import Flask, request
 from helpers import check_payload, parse_service_and_args_from, format_arguments
@@ -11,7 +11,7 @@ app = Flask(__name__)
 # parse message, format args, and check for errors in service and arguments
 @app.route('/', methods=['GET'])
 def hello():
-    return "Hello, this is the LoL_bot!"
+    return "Hello, this is the LoL bot!"
 
 
 @app.route('/message', methods=['POST'])
@@ -32,17 +32,33 @@ def new_message():
     if service == "help":
         return { "msg": help() }
     elif service == "title":
-        return { "msg": title(arguments[0], arguments[1]) }
+        return { "msg": title(arguments[0]) }
     elif service == "blurb":
-        return { "msg": blurb(arguments[0], arguments[1]) }
+        return { "msg": blurb(arguments[0]) }
     elif service == "partype":
-        return { "msg": partype(arguments[0], arguments[1]) }
+        return { "msg": partype(arguments[0]) }
     elif service == "attackrange":
-        return { "msg": attackrange(arguments[0], arguments[1]) }
+        return { "msg": attackrange(arguments[0]) }
     elif service == "movespeed":
-        return { "msg": movespeed(arguments[0], arguments[1]) }
+        return { "msg": movespeed(arguments[0]) }
     else:
         return {"A service and champion is required to get results"}
+
+@app.route('/help', methods=['GET'])
+def help():
+    message = "Hello! I'm the LoL bot. I can return the title, blurb,\n" \
+            "partype, attackrange or movespeed of a certain champion that is in \n" \
+            "League of Legends as of patch 10.24.\n" \
+            "To use my services, send me a message containing a service and a \n" \
+            "champion like \"title Zed\".\n" \
+            "\n" \
+            "Here are the commands you can use:\n" \
+            "title [champion]\n" \
+            "blurb [champion]\n" \
+            "partype [champion]\n" \
+            "attackrange [champion]\n" \
+            "movespeed [champion]\n"
+    return { "msg": message }
 
 @app.route('/title', methods=['GET'])
 def title_wrapper():
