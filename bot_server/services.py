@@ -155,3 +155,19 @@ def movespeed(champion):
 
     movespeed = data[champion]["stats"]["movespeed"] #finds dictionary of data, then champion, then stats, then movespeed
     return movespeed
+
+def help():
+    message = "Hello! I'm the LoL bot. I can return the title, blurb,\n" \
+            "partype, attackrange or movespeed of a certain champion that is in \n" \
+            "League of Legends as of patch 10.24.\n" \
+            "To use my services, send me a message containing a service and a \n" \
+            "champion like \"title Zed\".\n" \
+            "\n" \
+            "Here are the commands you can use:\n" \
+            "title [champion]\n" \
+            "blurb [champion]\n" \
+            "partype [champion]\n" \
+            "attackrange [champion]\n" \
+            "movespeed [champion]\n"
+    return message
+
