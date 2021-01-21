@@ -20,6 +20,26 @@ I also have a descriptive error that reports when something goes awry, as seen o
 Thirdly, I have effectively used the principles of decomposition and abstraction to make my code more efficient and elegant. I have created 1 module (services.py) that holds all the services, and 1 module (bot_server.py) that takes care of all the routes for the client side. The services are implemented in such a way that the services can be used in both directly through a HTTP request or using the client and client server to run it as well. My services are all parameterized, so if the input is different, the output/end return would be different as well.
 
 Furthermore, I have created and used edge case preventers in my code as well, so if someone intentionally or unintentionally leaves a space, apostrophe or uses capital letters in the wrong place the service will still be able to run as intended. One example of this is if someone is trying to get the title of a champion (Zed for example), and they type title "Z'''   E 'd'", the edge case preventer will modify the string to become "Zed" instead and return the title for Zed. If someone adds numbers or quotations in the client side, this will result in an error that says "A service and champion is required to get results". If someone is intentionally trying to get an error, they will get that, however simple errors such as forgetting a space or using an apostrophe would still return the intended result of the service.
+
+> 💬 Teacher Comments
+>
+> *Documentation*
+>
+> * Fantastic job reading and understanding the Data Dragon documentation. That is a huge and complex dataset and you learned its usages in great detail. 
+>
+> *HTTP Communication*
+> * Your comprehensive set of services and routes demonstrate an indepth grasp on HTTP communication. 
+> * Great work parsing the JSON - that be quite tricky and your services return a nicely formatted string. 
+> * Although you do provide a custom error message on the client side, ideally you also have custom error messages on the service and API side. For example, there is no error message if the request to DataDragon fails or if the user inputs an incorrect champion. 
+>
+> *Decomposition and Abstraction*
+> * Your code is well decomposed and abstracted containing many paramaterized services in a seprate module. 
+> * All of your services work seamlessly through the messaging client and as an API
+> 
+> To recieve an 8 in this criterion there would have been, at a minimum, message reporting an error connecting to DataDragon or a message reporting an incorrect champion.
+>
+> 7/8
+
 ## Criterion B - Planning and development
 **Score: 6/8**
 
@@ -36,6 +56,22 @@ Thirdly, I can document my software so that it is readable and usable by others.
 
 In conclusion, even though my planning document still can do with some more detail, I have done very well in other areas of criterion B. This is why I think I demonstrate a 6 in criterion B.
 
+> 💬 Teacher Comments
+>
+> *Planning*
+>
+> * Your planning document is quite detailed demonstrating a solid understanding of the overall project and what was expected. 
+>
+> *Interative Development*
+> * Fantastic work utilizing GitHub as a version control tool. You have 14 git commits! 
+> * Your Git commits also descripctively track your progress and speak to your midset throughout development. 
+>
+> *Documentation*
+> * Incredible job documenting your service, Wesley! Your README.md is provides detailed and comprehnsive instructions as to how to use your bot through the messaging client and as an API. 
+> * Additionally, your comments throughout your code perfectly outline each service's functionality and the reasoning for specific code blocks. 
+> 
+> 8/8
+
 ## Criterion C - Evaluation
 **Score: 7/8**
 
@@ -46,3 +82,14 @@ My project demonstrates the following learning claims:
 Firstly, I identified different scenarios in which my code may be used and outline the expected functionality of my code in these instances. In the planning document, I have outlined the different scenarios my code may be used in. I have also written the expected values when inputted with both normal use cases and edge cases. Because I have noted down the expected values of both the normal use cases and edge cases, I was able to lessen the amount of edge cases by modifying the inputted string using string modifiers and the particular code is able to be seen in all of the services of service.py. An example would be in line 28 to 39, where the strings are modified in different ways depending on the inputted string.
 
 Secondly, I have developed a testing strategy to ensure my code works as expected. In my planning document, it is able to be seen that I have a detailed testing strategy that tests and makes sure my code works as expected based on all of my use cases and edge cases. Originally before developing edge case preventers, capital letters, random spacing, and  apostrophes all affected the output, making an error when inputted. These can be both intentional or unintentional errors, so I coded the string modifier (AKA edge case preventer) to prevent these symbols and letters from affecting my code. However, I could try to prevent even more edge cases by adding symbols such as !@#$%^&*()-~][]/ and more to prevent intentional and malicious errors from happening.
+
+> 💬 Teacher Comments
+>
+> *Use Cases*
+> * Great work outlining various use cases and expected responses for your services; particularly scenarios where the user sends an incomplete message to bot. 
+>
+> *Testing Strategy*
+> * Solid testing framework with each messaging client use case with the intended outcome. 
+> * Amazing work developing your services to account for champion spelling errors! This required reading Python string documentation which was above and beyond the scope of this project. 
+>
+> 8/8
