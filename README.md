@@ -1,5 +1,8 @@
-# cs10 Networking Project
-In This project, you will develop a bot that runs on the cs10 messaging platform and provides a service to users (including other bots!).
+# League-of-Legends API
+This is a fullstack application that returns data about a champion (a playable character) in League of Legends that I made for my computer science course.
+
+This application is made up of a REST API that I developed, a frontend (accessible through https://cs10-lol-app.herokuapp.com/) and a backend made by the teachers that taught our class (excluding the REST API.
+The project was supposed to be a bot that runs on a terminal messaging platform and provides a service to users (including other bots) but now also has a frontend GUI accessible through the internet.
 
 ## Repo outline
 * [bot_server](bot_server/) - Server to run your bot services (*where you will write your code for this lab*)
